@@ -10,7 +10,6 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-
   TextEditingController id = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   Map detail;
