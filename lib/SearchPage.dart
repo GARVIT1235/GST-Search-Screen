@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'dart:convert';
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +15,7 @@ class _SearchPageState extends State<SearchPage> {
   final _formKey = GlobalKey<FormState>();
   Map detail;
 
-  FetchData() async {
+  fetchData() async {
     await http.get(Uri.parse(
         'https://611e655b9771bf001785c400.mockapi.io/GST/'+ id.text))
         .then((value) {
@@ -25,6 +23,8 @@ class _SearchPageState extends State<SearchPage> {
           setState(() {
             detail = result;
           });
+          if(value.statusCode ==  200)
+          {
           if(detail.isEmpty || detail == null)
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Not Found',style: TextStyle(
                 color: Colors.green,
@@ -32,9 +32,8 @@ class _SearchPageState extends State<SearchPage> {
             ),)));
           else
             Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(detail: detail)));
-        });
+        }});
   }
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -129,11 +128,16 @@ class _SearchPageState extends State<SearchPage> {
                                 child: TextButton(
                                     onPressed: (){
                                       if (_formKey.currentState.validate()) {
-                                        FetchData();
+                                        fetchData();
                                       }
                                       },
                                     child: Text('Search',style: TextStyle(color: Colors.white,backgroundColor: Colors.green),)
                                 ),
+                              ),
+                              SizedBox(height: 50,),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text('Internet Should be Connected',style: TextStyle(color: Colors.green,fontSize: 20,fontWeight: FontWeight.bold)),
                               )
                             ]),
                       ),
@@ -141,7 +145,7 @@ class _SearchPageState extends State<SearchPage> {
                     Center(child: Text('Comming Soon'))
                   ]),
             )
-        )
+        ),
     );
   }
 }
