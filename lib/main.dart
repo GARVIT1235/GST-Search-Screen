@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'DetailPage.dart';
 import 'SearchPage.dart';
 
@@ -18,13 +17,11 @@ class MyApp extends StatelessWidget {
         title: 'GST Search',
         themeMode: ThemeMode.light,
         theme: ThemeData(
+          brightness: Brightness.light,
             primarySwatch: Colors.green,
-            textTheme: TextTheme(
-                bodyText2: GoogleFonts.quicksand(fontSize: 14.0))
-        ),
+            ),
         darkTheme: ThemeData(
             brightness: Brightness.dark,
-            textTheme: TextTheme(bodyText2: GoogleFonts.bitter(fontSize: 14.0))
         ),
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
