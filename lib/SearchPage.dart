@@ -16,12 +16,13 @@ class _SearchPageState extends State<SearchPage> {
 
   fetchData() async {
     await http.get(Uri.parse(
-        'https://611e655b9771bf001785c400.mockapi.io/GST/'+ id.text))
+        "https://611e655b9771bf001785c400.mockapi.io/GST/"+ id.text))
         .then((value) {
           Map result = jsonDecode(value.body);
           setState(() {
             detail = result;
           });
+
           if(detail.isEmpty || detail == null)
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Not Found',style: TextStyle(
                 color: Colors.green,
@@ -126,6 +127,10 @@ class _SearchPageState extends State<SearchPage> {
                                   child: TextButton(
                                       onPressed: (){
                                         if (_formKey.currentState.validate()) {
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Loading ........',style: TextStyle(
+                                              color: Colors.green,
+                                              fontWeight: FontWeight.bold
+                                          ),)));
                                           fetchData();
                                         }
                                         },

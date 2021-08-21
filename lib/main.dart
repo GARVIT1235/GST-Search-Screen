@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'DetailPage.dart';
 import 'SearchPage.dart';
 
 void main() {
@@ -26,7 +25,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
           '/': (BuildContext context) => SearchPage(),
-          '/home': (BuildContext context) => DetailPage(),
         }
     );
   }
